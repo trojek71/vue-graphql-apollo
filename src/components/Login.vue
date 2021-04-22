@@ -1,8 +1,7 @@
 <template>
   <div class="vue-tempalte">
-    <form>
-      <h3>Sign In</h3>
-
+    <h3>Sign In</h3>
+    <form action="POST" @submit.prevent="login">
       <div class="form-group">
         <label>Email address</label>
         <input
@@ -47,7 +46,7 @@
 </template>
 
 <script>
-import { LOGIN_MUTATION } from "../graphql/graphql";
+import { LOGIN_MUTATION } from "../graphql/graphql.js";
 export default {
   name: "Login",
   data() {
@@ -67,7 +66,9 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data.token);
+          const token = response.data.login.token;
+          console.log("asasf", token);
+          localStorage.setItem("apollo-token", token);
         });
     },
   },
