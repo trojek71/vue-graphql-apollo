@@ -5,12 +5,20 @@
 
       <div class="form-group">
         <label>Email address</label>
-        <input type="email" class="form-control form-control-lg" />
+        <input
+          v-model="email"
+          type="email"
+          class="form-control form-control-lg"
+        />
       </div>
 
       <div class="form-group">
         <label>Password</label>
-        <input type="password" class="form-control form-control-lg" />
+        <input
+          v-model="password"
+          type="password"
+          class="form-control form-control-lg"
+        />
       </div>
 
       <button type="submit" class="btn btn-dark btn-lg btn-block">
@@ -39,9 +47,29 @@
 </template>
 
 <script>
+import { LOGIN_MUTATION } from "../graphql/graphql";
 export default {
+  name: "Login",
   data() {
-    return {};
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    login() {
+      this.$apollo
+        .mutate({
+          mutation: LOGIN_MUTATION,
+          variables: {
+            email: this.email,
+            password: this.password,
+          },
+        })
+        .then((response) => {
+          console.log(response.data.token);
+        });
+    },
   },
 };
 </script>
