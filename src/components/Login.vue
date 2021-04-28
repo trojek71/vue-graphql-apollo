@@ -67,8 +67,10 @@ export default {
         })
         .then((response) => {
           const token = response.data.login.token;
-          console.log("asasf", token);
           localStorage.setItem("apollo-token", token);
+          if(this.login){
+            this.$router.push({ path: 'HelloWorld' })
+          }
         });
     },
   },
