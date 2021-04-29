@@ -21,6 +21,11 @@
               >Sign up</router-link
             >
           </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-primary" v-on:click="logout()" >
+              Log out</button
+            >
+          </li>
         </ul>
       </div>
     </nav>
@@ -35,6 +40,27 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  name:"app",
+
+//import { defineComponent } from '@vue/composition-api'
+
+// export default defineComponent({
+//   setup() {
+    
+//   },
+  methods: {
+    logout() {
+      localStorage.removeItem('apollo-token')
+      
+            this.$router.push({ path: '/login' })
+    }
+  }
+}
+//})
+</script>
+
 
 <style lang="scss">
 #app {
